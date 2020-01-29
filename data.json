@@ -1,0 +1,24 @@
+{
+  "todo-list": [
+    {
+      "id": 1,
+      "act": "jhlaelfbiir",
+      "status": false
+    },
+    {
+      "id": 2,
+      "act": "lari pagi",
+      "status": false
+    },
+    {
+      "id": 4,
+      "act": "berangkat",
+      "status": false
+    },
+    {
+      "id": 3,
+      "act": "mancing",
+      "status": true
+    }
+  ]
+}
