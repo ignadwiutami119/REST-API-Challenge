@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Task {
 
     class Program {
-        static async Task<int> Main (string[] args) {
+        public static int Main (string[] args) {
             var Modify_json = new CommandLineApplication () {
                 Name = "modify_json",
                 Description = "it should modify json data",
@@ -19,11 +19,11 @@ namespace Task {
             Modify_json.Command ("modify", app => {
                 app.Description = "change json data";
                 var show = app.Option ("--show", "show data", CommandOptionType.SingleOrNoValue);
-                var clear = app.Option ("--clear", "show data", CommandOptionType.SingleOrNoValue);
-                var add = app.Option ("--add", "show data", CommandOptionType.MultipleValue);
-                var update = app.Option ("--update", "show data", CommandOptionType.SingleOrNoValue);
-                var delete = app.Option ("--delete", "show data", CommandOptionType.SingleOrNoValue);
-                var done = app.Option ("--done", "show data", CommandOptionType.SingleOrNoValue);
+                var clear = app.Option ("--clear", "clear all data", CommandOptionType.SingleOrNoValue);
+                var add = app.Option ("--add", "add data", CommandOptionType.MultipleValue);
+                var update = app.Option ("--update", "upate spesific data", CommandOptionType.SingleOrNoValue);
+                var delete = app.Option ("--delete", "delete spesific data", CommandOptionType.SingleOrNoValue);
+                var done = app.Option ("--done", "change activity status", CommandOptionType.SingleOrNoValue);
                 app.OnExecuteAsync (async cancellationToken => {
                     HttpClient client = new HttpClient ();
                     HttpRequestMessage req = new HttpRequestMessage (HttpMethod.Get, "http://localhost:3000/todo-list");
@@ -41,15 +41,13 @@ namespace Task {
                         foreach (var item in data) {
                             await client.DeleteAsync ("http://localhost:3000/todo-list/" + item.id);
                         }
+                        Console.WriteLine ("Data empty");
                     }
 
                     if (delete.HasValue ()) {
                         var del = Convert.ToInt32 (delete.Value ());
-                        foreach (var item in data) {
-                            if (item.id == del) {
-                                await client.DeleteAsync ("http://localhost:3000/todo-list/" + item.id);
-                            }
-                        }
+                        await client.DeleteAsync ("http://localhost:3000/todo-list/" + del);
+                        Console.WriteLine ($"Data that has id : {del} was deleted");
                     }
 
                     if (update.HasValue ()) {
@@ -79,7 +77,7 @@ namespace Task {
                                 var toJson = JsonConvert.SerializeObject (obj);
                                 var cnt = new StringContent (toJson, Encoding.UTF8, "application/json");
                                 await client.PatchAsync ("http://localhost:3000/todo-list/" + item.id, cnt);
-                                Console.WriteLine("status number "+item.id+" done");
+                                Console.WriteLine ("status number " + item.id + " done");
                             }
                         }
                     }

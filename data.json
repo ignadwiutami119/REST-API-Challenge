@@ -1,11 +1,6 @@
 {
   "todo-list": [
     {
-      "id": 1,
-      "act": "jhlaelfbiir",
-      "status": false
-    },
-    {
       "id": 2,
       "act": "lari pagi",
       "status": false
@@ -16,13 +11,8 @@
       "status": false
     },
     {
-      "id": 3,
-      "act": "mancing",
-      "status": true
-    },
-    {
-      "id": 5,
-      "act": "rebahan ae lah",
+      "id": 1,
+      "act": "Pangun pagi",
       "status": false
     }
   ]
