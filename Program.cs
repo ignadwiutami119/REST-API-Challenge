@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using McMaster.Extensions.CommandLineUtils;
 using Newtonsoft.Json;
 
 namespace Task {
-    class Post {
-        public uint id { get; set; }
-        public string Title { get; set; }
-    }
+
     class Program {
         static async Task<int> Main (string[] args) {
             var Modify_json = new CommandLineApplication () {
